@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMUN 2026</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts: Outfit (Headings) & Plus Jakarta Sans (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            950: '#030814',
+                            900: '#071226',
+                            800: '#0F224A',
+                            700: '#17346F',
+                            600: '#1E4896',
+                            500: '#265EC4'
+                        },
+                        gold: {
+                            400: '#FCD34D',
+                            500: '#F59E0B',
+                            600: '#D97706',
+                            light: '#FFFBEB'
+                        },
+                        accent: {
+                            cyan: '#06B6D4',
+                            teal: '#14B8A6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        heading: ['"Outfit"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Custom Deep Navy Mesh Background */
+        .bg-navy-mesh {
+            background-color: #050d1a;
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(30, 72, 150, 0.35) 0px, transparent 50%),
+                radial-gradient(at 90% 20%, rgba(217, 119, 6, 0.18) 0px, transparent 50%),
+                radial-gradient(at 50% 80%, rgba(6, 182, 212, 0.2) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-panel {
+            background: rgba(15, 34, 74, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .glass-panel-light {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .glass-nav {
+            background: rgba(7, 18, 38, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        /* Ambient Glow & Badge Effects */
+        .glow-gold {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+        }
+        
+        .glow-navy {
+            box-shadow: 0 0 30px rgba(30, 72, 150, 0.4);
+        }
+
+        /* Card Hover Animations */
+        .hover-lift {
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .hover-lift:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 35px -10px rgba(7, 18, 38, 0.25), 0 0 20px rgba(245, 158, 11, 0.15);
+        }
+
+        /* Button Shimmer Effect */
+        .btn-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shimmer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(
+                60deg,
+                rgba(255, 255, 255, 0) 20%,
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0) 80%
+            );
+            transform: rotate(25deg);
+            transition: all 0.8s ease;
+        }
+        .btn-shimmer:hover::after {
+            left: 140%;
+        }
+
+        /* Custom Keyframes */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.05); }
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.92) translateY(15px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        .animate-float-slow {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        .animate-modal-pop {
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Text Gradients */
+        .text-gradient-gold {
+            background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-blue {
+            background: linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #071226;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E4896;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #F59E0B;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-gold-500 selection:text-navy-950">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 glass-nav text-white border-b border-slate-700/50 shadow-2xl transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo & Title -->
+            <a href="#" class="flex items-center space-x-3.5 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-gold-600 via-gold-500 to-amber-300 flex items-center justify-center text-navy-950 font-black text-xl shadow-lg shadow-gold-500/30 group-hover:scale-105 transition-transform duration-300">
+                    <img src="a3ff2396e396175f5847f1201b6516a4f4fad5d5.webp" alt="">
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-2xl font-black font-heading tracking-tight text-white leading-none">SMUN</span>
+                        <span class="text-2xl font-black font-heading text-gradient-gold">2026</span>
+                    </div>
+                    <span class="text-[10px] text-slate-300 font-bold tracking-widest uppercase block mt-0.5">SpreTech Model UN</span>
+                </div>
+            </a>
+            
+            <!-- Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-7 text-sm font-bold tracking-wide">
+                <a href="#about" class="text-slate-200 hover:text-gold-400 transition-colors duration-200">About</a>
+                <a href="#gains" class="text-slate-200 hover:text-gold-400 transition-colors duration-200">Benefits</a>
+                <a href="#committee" class="text-slate-200 hover:text-gold-400 transition-colors duration-200">Committee</a>
+                <a href="#awards" class="text-slate-200 hover:text-gold-400 transition-colors duration-200">Awards</a>
+                <a href="#faqs" class="text-slate-200 hover:text-gold-400 transition-colors duration-200">FAQs</a>
+            </nav>
+
+            <!-- Quick CTA Header Buttons -->
+            <div class="flex items-center space-x-3">
+                <button onclick="openModal('doubtModal')" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-extrabold bg-navy-800/80 hover:bg-navy-700 text-slate-200 border border-slate-600 transition-all">
+                    <i class="fa-solid fa-circle-question text-gold-400"></i>
+                    <span>Ask Doubt</span>
+                </button>
+
+                <button onclick="openModal('registerModal')" class="btn-shimmer bg-gradient-to-r from-gold-500 via-amber-400 to-gold-600 hover:from-amber-400 hover:to-gold-500 text-navy-950 font-black px-5 py-2.5 rounded-xl text-xs sm:text-sm tracking-wide shadow-lg shadow-gold-500/25 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span>Register Now</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative bg-navy-mesh text-white pt-12 pb-24 px-4 overflow-hidden border-b border-navy-800">
+        <!-- Floating Glow Balls -->
+        <div class="absolute top-10 left-10 w-80 h-80 bg-navy-600/30 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
+        <div class="absolute bottom-5 right-10 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-center max-w-3xl mx-auto">
+                
+                <!-- Tagline Badge -->
+                <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-navy-800/90 text-gold-400 border border-gold-500/40 text-xs font-black uppercase tracking-widest mb-6 glow-gold animate-float-slow">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                    <span>100% FREE & ONLINE MUN CONFERENCE</span>
+                </div>
+
+                <!-- Main Hero Heading -->
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black font-heading tracking-tight leading-none mb-4">
+                    SpreTech Model United Nations
+                    <span class="text-gradient-gold block mt-2">SMUN 2026</span>
+                </h1>
+                
+                <!-- Tagline Quote -->
+                <p class="text-lg sm:text-2xl text-slate-200 font-medium italic mb-8 max-w-2xl mx-auto">
+                    "It's More Than Just Debate"
+                </p>
+
+                <!-- Hero Action Buttons Stack -->
+                <div class="flex flex-wrap items-center justify-center gap-4 mb-10">
+                    <button onclick="openModal('registerModal')" class="btn-shimmer bg-gradient-to-r from-gold-500 to-amber-500 hover:from-amber-400 hover:to-gold-400 text-navy-950 font-black px-7 py-4 rounded-2xl text-base shadow-xl shadow-gold-500/30 transition-all transform hover:-translate-y-1 flex items-center gap-3">
+                        <i class="fa-solid fa-paper-plane text-lg"></i>
+                        <span>Register Now (Free)</span>
+                    </button>
+
+                    <button onclick="openModal('doubtModal')" class="bg-navy-800/90 hover:bg-navy-700 text-white font-extrabold px-6 py-4 rounded-2xl text-base border-2 border-slate-600 hover:border-gold-400 transition-all flex items-center gap-3 shadow-lg">
+                        <i class="fa-solid fa-comments text-gold-400"></i>
+                        <span>Ask Doubt / Google Form</span>
+                    </button>
+                </div>
+
+                <!-- COUNTDOWN TIMER CONTAINER -->
+                <div class="glass-panel rounded-3xl p-6 max-w-xl mx-auto shadow-2xl border border-white/15 relative">
+                    <div class="text-xs font-extrabold text-slate-300 uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-clock text-gold-400"></i> Registration Ends In
+                    </div>
+
+                    <div class="grid grid-cols-4 gap-2.5 sm:gap-4 text-center" id="countdown">
+                        <div class="bg-navy-950/80 rounded-2xl p-3 border border-slate-700/80">
+                            <span id="days" class="block text-2xl sm:text-4xl font-black font-heading text-gold-400">00</span>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1 block">Days</span>
+                        </div>
+                        <div class="bg-navy-950/80 rounded-2xl p-3 border border-slate-700/80">
+                            <span id="hours" class="block text-2xl sm:text-4xl font-black font-heading text-white">00</span>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1 block">Hours</span>
+                        </div>
+                        <div class="bg-navy-950/80 rounded-2xl p-3 border border-slate-700/80">
+                            <span id="minutes" class="block text-2xl sm:text-4xl font-black font-heading text-white">00</span>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1 block">Mins</span>
+                        </div>
+                        <div class="bg-navy-950/80 rounded-2xl p-3 border border-slate-700/80">
+                            <span id="seconds" class="block text-2xl sm:text-4xl font-black font-heading text-gold-400">00</span>
+                            <span class="text-[10px] sm:text-xs text-slate-400 font-bold uppercase tracking-wider mt-1 block">Secs</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN TWO-COLUMN CONTAINER -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20 mb-20 flex-grow w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- LEFT MAIN CONTENT (8 COLUMNS) -->
+            <main class="lg:col-span-8 space-y-8">
+                
+                <!-- About SMUN 2026 Section -->
+                <section id="about" class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 hover-lift">
+                    <div class="flex items-center gap-3.5 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-navy-800 text-gold-400 flex items-center justify-center font-bold text-xl shadow-md">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-black font-heading text-navy-950 tracking-tight">About SMUN 2026</h2>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Virtual International MUN Conference</p>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-600 leading-relaxed text-base sm:text-lg mb-6">
+                        <strong class="text-navy-950">SpreTech Model United Nations (SMUN) 2026</strong> is a beginner-friendly, <strong class="text-emerald-600">100% FREE</strong>, and fully online MUN conference designed to introduce students to diplomacy, public speaking, position paper writing, and global problem-solving.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                            <i class="fa-solid fa-circle-check text-emerald-500 text-xl mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold font-heading text-navy-950">Beginner Friendly</h4>
+                                <p class="text-xs text-slate-500 mt-1">Complete mentorship, rules guidance, and supportive Executive Board atmosphere.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex items-start gap-3.5">
+                            <i class="fa-solid fa-circle-check text-emerald-500 text-xl mt-0.5"></i>
+                            <div>
+                                <h4 class="font-bold font-heading text-navy-950">100% Free Entry</h4>
+                                <p class="text-xs text-slate-500 mt-1">Zero registration or hidden charges for accepted international delegates.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- What You Will Gain Section -->
+                <section id="gains" class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 hover-lift">
+                    <div class="flex items-center gap-3.5 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-gold-light border border-gold-400/50 text-gold-600 flex items-center justify-center font-bold text-xl shadow-sm">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-black font-heading text-navy-950 tracking-tight">At SMUN 2026, You Will</h2>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Key Takeaways & Benefits</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50 flex items-center gap-4 group">
+                            <span class="text-3xl p-3 bg-amber-100/60 rounded-2xl group-hover:scale-110 transition-transform">🎤</span>
+                            <div>
+                                <h3 class="font-bold font-heading text-navy-950 text-base">Public Speaking</h3>
+                                <p class="text-xs text-slate-500">Build confidence delivering speeches in front of international peers.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50 flex items-center gap-4 group">
+                            <span class="text-3xl p-3 bg-blue-100/60 rounded-2xl group-hover:scale-110 transition-transform">📝</span>
+                            <div>
+                                <h3 class="font-bold font-heading text-navy-950 text-base">Position Paper Writing</h3>
+                                <p class="text-xs text-slate-500">Master resolution drafting and diplomatic paper structures.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50 flex items-center gap-4 group">
+                            <span class="text-3xl p-3 bg-emerald-100/60 rounded-2xl group-hover:scale-110 transition-transform">🤝</span>
+                            <div>
+                                <h3 class="font-bold font-heading text-navy-950 text-base">Negotiation Skills</h3>
+                                <p class="text-xs text-slate-500">Develop caucus strategy, bloc formation, and compromise tactics.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50 flex items-center gap-4 group">
+                            <span class="text-3xl p-3 bg-indigo-100/60 rounded-2xl group-hover:scale-110 transition-transform">🌍</span>
+                            <div>
+                                <h3 class="font-bold font-heading text-navy-950 text-base">Global Awareness</h3>
+                                <p class="text-xs text-slate-500">Analyze real-world healthcare and economic challenges.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50 flex items-center gap-4 group">
+                            <span class="text-3xl p-3 bg-purple-100/60 rounded-2xl group-hover:scale-110 transition-transform">🧠</span>
+                            <div>
+                                <h3 class="font-bold font-heading text-navy-950 text-base">Critical Leadership</h3>
+                                <p class="text-xs text-slate-500">Enhance research depth and composure during debates.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 rounded-2xl border border-slate-200/80 bg-gradient-to-br from-white to-slate-50 flex items-center gap-4 group">
+                            <span class="text-3xl p-3 bg-yellow-100/60 rounded-2xl group-hover:scale-110 transition-transform">🏆</span>
+                            <div>
+                                <h3 class="font-bold font-heading text-navy-950 text-base">Certificates & Awards</h3>
+                                <p class="text-xs text-slate-500">Earn official delegate certificates and compete for top awards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Committee & Agenda Section -->
+                <section id="committee" class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 hover-lift">
+                    <div class="flex items-center gap-3.5 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-sky-50 border border-sky-200 text-sky-600 flex items-center justify-center font-bold text-xl shadow-sm">
+                            <i class="fa-solid fa-landmark"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-black font-heading text-navy-950 tracking-tight">Committee & Agendas</h2>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">United Nations Council Simulation</p>
+                        </div>
+                    </div>
+
+                    <div class="border-2 border-navy-800/20 rounded-3xl p-6 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+                        <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                            <span class="px-3.5 py-1.5 bg-navy-800 text-gold-400 rounded-xl text-xs font-extrabold uppercase tracking-widest shadow-md">UN Council</span>
+                            <h3 class="text-xl sm:text-2xl font-black font-heading text-navy-950">United Nations Human Rights Council (UNHRC)</h3>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Agenda 1 -->
+                            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                                <div class="flex items-center gap-2 text-xs font-extrabold text-gold-600 uppercase tracking-wider mb-1.5">
+                                    <i class="fa-solid fa-notes-medical"></i> Agenda
+                                </div>
+                                <h4 class="text-lg font-bold font-heading text-navy-950 mb-2">Ensuring Equal Access to Healthcare in Developing Countries</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    Delegates will discuss ways to improve healthcare accessibility, strengthen national healthcare systems, expand access to medicines and vaccines, improve maternal and child healthcare, and promote international cooperation to ensure quality healthcare for all.
+                                </p>
+                            </div>
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+                            <span class="px-3.5 py-1.5 bg-navy-800 text-gold-400 rounded-xl text-xs font-extrabold uppercase tracking-widest shadow-md">UN Council</span>
+                            <h3 class="text-xl sm:text-2xl font-black font-heading text-navy-950">United Nations Economic and Social Council (ECOSOC)</h3>
+                        </div>
+
+                            <!-- Agenda 2 -->
+                            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                                <div class="flex items-center gap-2 text-xs font-extrabold text-gold-600 uppercase tracking-wider mb-1.5">
+                                    <i class="fa-solid fa-chart-line"></i> Agenda
+                                </div>
+                                <h4 class="text-lg font-bold font-heading text-navy-950 mb-2">Promoting Sustainable Economic Growth Through Youth Entrepreneurship</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    Addressing unemployment and global economic disparity by creating supportive policy frameworks, financial literacy channels, and unlocking venture capital for youth-driven innovation.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Who Should Join Section -->
+                <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 hover-lift">
+                    <div class="flex items-center gap-3.5 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-200 text-indigo-600 flex items-center justify-center font-bold text-xl shadow-sm">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-black font-heading text-navy-950 tracking-tight">Who Should Join?</h2>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Eligible Delegate Profile</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <span class="text-4xl block mb-2">🧑‍🎓</span>
+                            <h4 class="font-bold font-heading text-navy-950 mb-1">First-Time MUNers</h4>
+                            <p class="text-xs text-slate-500">Students attending their first MUN looking for a friendly environment.</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <span class="text-4xl block mb-2">🎓</span>
+                            <h4 class="font-bold font-heading text-navy-950 mb-1">Skill Improvers</h4>
+                            <p class="text-xs text-slate-500">Delegates looking to polish public speaking and resolution drafting.</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 text-center">
+                            <span class="text-4xl block mb-2">🌍</span>
+                            <h4 class="font-bold font-heading text-navy-950 mb-1">Global Thinkers</h4>
+                            <p class="text-xs text-slate-500">Anyone passionate about international relations and diplomatic policy.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Awards Section -->
+                <section id="awards" class="bg-gradient-to-br from-navy-950 via-navy-900 to-navy-800 text-white rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden border border-navy-700">
+                    <div class="flex items-center gap-3.5 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-gold-500/20 border border-gold-400/40 text-gold-400 flex items-center justify-center font-bold text-xl shadow-lg">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-black font-heading text-white tracking-tight">Awards & Recognition</h2>
+                            <p class="text-xs font-bold text-gold-400 uppercase tracking-wider">Compete for Honor & Certificates</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex items-center gap-3.5 bg-white/10 p-4 rounded-2xl border border-white/10">
+                            <span class="text-3xl">🥇</span>
+                            <span class="font-bold font-heading text-white text-base">Best Delegate</span>
+                        </div>
+
+                        <div class="flex items-center gap-3.5 bg-white/10 p-4 rounded-2xl border border-white/10">
+                            <span class="text-3xl">🥈</span>
+                            <span class="font-bold font-heading text-white text-base">Outstanding Delegate</span>
+                        </div>
+
+                        <div class="flex items-center gap-3.5 bg-white/10 p-4 rounded-2xl border border-white/10">
+                            <span class="text-3xl">🥉</span>
+                            <span class="font-bold font-heading text-white text-base">Honourable Mention</span>
+                        </div>
+
+                        <div class="flex items-center gap-3.5 bg-white/10 p-4 rounded-2xl border border-white/10">
+                            <span class="text-3xl">📝</span>
+                            <span class="font-bold font-heading text-white text-base">Best Position Paper</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-5 border-t border-white/15 text-center">
+                        <span class="inline-flex items-center gap-2 text-sm text-gold-400 font-bold">
+                            <i class="fa-solid fa-certificate"></i> E-Certificate of Participation Provided for All Active Delegates
+                        </span>
+                    </div>
+                </section>
+
+                <!-- Why Choose SMUN -->
+                <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 hover-lift">
+                    <div class="flex items-center gap-3.5 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center font-bold text-xl shadow-sm">
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-black font-heading text-navy-950 tracking-tight">Why Choose SMUN?</h2>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Conference Highlights</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                        <div class="flex items-center gap-3 p-3.5 bg-emerald-50/70 rounded-2xl border border-emerald-200 text-slate-800 text-sm font-bold">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i> Perfect for Beginners
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 bg-emerald-50/70 rounded-2xl border border-emerald-200 text-slate-800 text-sm font-bold">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i> Interactive & Engaging Sessions
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 bg-emerald-50/70 rounded-2xl border border-emerald-200 text-slate-800 text-sm font-bold">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i> Experienced Executive Board
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 bg-emerald-50/70 rounded-2xl border border-emerald-200 text-slate-800 text-sm font-bold">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i> Public Speaking & Leadership
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 bg-emerald-50/70 rounded-2xl border border-emerald-200 text-slate-800 text-sm font-bold">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i> Meet Students Worldwide
+                        </div>
+                        <div class="flex items-center gap-3 p-3.5 bg-emerald-50/70 rounded-2xl border border-emerald-200 text-slate-800 text-sm font-bold">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-lg"></i> Real MUN Simulation
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Frequently Asked Questions (FAQs) Accordion -->
+                <section id="faqs" class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+                    <div class="flex items-center gap-3.5 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center font-bold text-xl shadow-sm">
+                            <i class="fa-solid fa-circle-question"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-black font-heading text-navy-950 tracking-tight">Frequently Asked Questions</h2>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Quick Answers</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="border border-slate-200 rounded-2xl p-4 cursor-pointer hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+                            <div class="flex items-center justify-between font-bold text-navy-950 text-sm sm:text-base">
+                                <span>Is SpreTech MUN 2026 really 100% free?</span>
+                                <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 mt-2 hidden leading-relaxed">Yes! There are zero registration or delegate fees. All training, committee sessions, and electronic certificates are provided completely free.</p>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-2xl p-4 cursor-pointer hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+                            <div class="flex items-center justify-between font-bold text-navy-950 text-sm sm:text-base">
+                                <span>I am a complete beginner. Can I still join?</span>
+                                <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 mt-2 hidden leading-relaxed">Absolutely! SMUN 2026 is specifically designed to be beginner-friendly. Our Executive Board will explain all rules of procedure step-by-step.</p>
+                        </div>
+
+                        <div class="border border-slate-200 rounded-2xl p-4 cursor-pointer hover:bg-slate-50 transition-colors" onclick="toggleFaq(this)">
+                            <div class="flex items-center justify-between font-bold text-navy-950 text-sm sm:text-base">
+                                <span>How will I receive my country matrix and meeting link?</span>
+                                <i class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
+                            </div>
+                            <p class="text-xs sm:text-sm text-slate-600 mt-2 hidden leading-relaxed">All matrix allotments, background guides, and virtual meeting links (Google Meet/Zoom) will be sent directly to your registered email address before the conference.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- RIGHT SIDEBAR (MATCHING EXACT REFERENCE IMAGE STRUCTURE) -->
+            <aside class="lg:col-span-4">
+                <div class="sticky top-24 space-y-6">
+                    
+                    <!-- Reference Card Box -->
+                    <div class="bg-white rounded-3xl p-6 shadow-xl border border-slate-200 relative overflow-hidden">
+                        
+                        <!-- Buttons Stack -->
+                        <div class="space-y-3.5 mb-6">
+                            <!-- Apply / Register now button -->
+                            <button onclick="openModal('registerModal')" class="btn-shimmer w-full bg-navy-800 hover:bg-navy-700 text-white font-black py-3.5 px-5 rounded-2xl flex items-center justify-between shadow-lg shadow-navy-800/20 transition-all group">
+                                <span class="text-base tracking-wide font-heading">Apply now</span>
+                                <i class="fa-solid fa-chevron-right text-sm transition-transform group-hover:translate-x-1"></i>
+                            </button>
+
+                            <!-- Contact Organizers / Ask Queries button -->
+                            <button onclick="openModal('doubtModal')" class="w-full bg-white hover:bg-slate-50 text-navy-800 border-2 border-navy-800 font-extrabold py-3 px-5 rounded-2xl flex items-center justify-between shadow-sm transition-all group">
+                                <span class="text-base font-heading">Contact organizers</span>
+                                <i class="fa-solid fa-paper-plane text-sm text-navy-800 transition-transform group-hover:rotate-12"></i>
+                            </button>
+
+                            <!-- Instagram button -->
+                            <a href="https://www.instagram.com/spretech_/" target="_blank" class="w-full bg-gradient-to-r from-amber-500 to-gold-500 hover:from-amber-600 hover:to-gold-600 text-white font-extrabold py-3 px-5 rounded-2xl flex items-center justify-center gap-2 shadow-md transition-all">
+                                <i class="fa-brands fa-instagram text-xl"></i>
+                                <span class="text-sm font-heading">Follow on Instagram</span>
+                            </a>
+                        </div>
+
+                        <!-- Conference Details List -->
+                        <div class="space-y-4 pt-5 border-t border-slate-200">
+                            <h3 class="text-xl font-black font-heading text-navy-950 flex items-center justify-between">
+                                Conference
+                                <i class="fa-solid fa-pen-to-square text-amber-500 text-base cursor-pointer hover:scale-110 transition-transform" onclick="openModal('registerModal')"></i>
+                            </h3>
+
+                            <ul class="space-y-3.5 text-sm text-slate-700">
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-location-dot text-slate-500 mt-1 w-4 text-center"></i>
+                                    <div>
+                                        <span class="block text-navy-950 font-bold">Online</span>
+                                        <span class="text-xs text-slate-500">100% Virtual Conference</span>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-calendar-days text-slate-500 mt-1 w-4 text-center"></i>
+                                    <div>
+                                        <span class="block text-navy-950 font-bold">Aug 23, 2026</span>
+                                        <span class="text-xs text-slate-500">Sunday</span>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-ticket text-slate-500 mt-1 w-4 text-center"></i>
+                                    <div class="flex items-center gap-1.5">
+                                        <span class="block text-navy-950 font-bold">Free</span>
+                                        <span class="text-[10px] bg-sky-100 text-sky-700 font-bold px-1.5 py-0.5 rounded border border-sky-300">i</span>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-users text-slate-500 mt-1 w-4 text-center"></i>
+                                    <div>
+                                        <span class="block text-navy-950 font-bold">40 delegates expected</span>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-start gap-3">
+                                    <i class="fa-solid fa-graduation-cap text-slate-500 mt-1 w-4 text-center"></i>
+                                    <div>
+                                        <span class="block text-navy-950 font-bold leading-tight">University Students and School Students</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Applications Deadline -->
+                        <div class="space-y-3 pt-6 mt-6 border-t border-slate-200">
+                            <h3 class="text-xl font-black font-heading text-navy-950">Applications</h3>
+                            
+                            <div class="flex items-center justify-between text-sm py-1">
+                                <span class="font-bold text-slate-800">Delegates</span>
+                                <span class="text-slate-600 font-semibold">Jul 30 - Aug 20, 2026</span>
+                            </div>
+
+                            <div class="bg-emerald-50 border border-emerald-200 text-emerald-800 p-3 rounded-2xl text-xs font-bold flex items-center gap-2.5">
+                                <span class="relative flex h-3 w-3">
+                                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                  <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                                </span>
+                                Applications are currently OPEN
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Stay Connected Box -->
+                    <div class="bg-gradient-to-br from-navy-900 to-navy-800 text-white rounded-3xl p-6 shadow-md border border-navy-700">
+                        <h4 class="font-black font-heading text-lg mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-bullhorn text-gold-400"></i> Stay Connected
+                        </h4>
+                        
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- REGISTER MODAL -->
+    <div id="registerModal" class="fixed inset-0 bg-navy-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl border border-slate-100 max-h-[90vh] overflow-y-auto animate-modal-pop">
+            <button onclick="closeModal('registerModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="flex items-center gap-3.5 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-navy-800 text-gold-400 flex items-center justify-center font-bold text-xl">
+                    <i class="fa-solid fa-user-plus"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black font-heading text-navy-950">Delegate Registration</h3>
+                    <p class="text-xs font-bold text-slate-500">SpreTech Model UN 2026 (Free Online Conference)</p>
+                </div>
+            </div>
+
+            <form id="registrationForm" action="https://formspree.io/f/xjybykda" method="POST" onsubmit="handleRegister(event)" class="space-y-4">
+                <input type="hidden" name="_subject" value="New SMUN 2026 Delegate Registration">
+                <input type="hidden" name="form_type" value="Delegate Registration">
+
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">Full Name *</label>
+                    <input type="text" name="full_name" required placeholder="e.g. Alex Rivera" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm">
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">Email Address *</label>
+                        <input type="email" name="email" required placeholder="alex@example.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">Phone Number  country code*</label>
+                        <input type="tel" name="phone" required placeholder="+1 234 567 890" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">School / Institution *</label>
+                        <input type="text" name="institution" required placeholder="High School / University" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">Country *</label>
+                        <input type="text" name="country" required placeholder="Your Country" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">Committee *</label>
+                    <select name="experience" required class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm bg-white">
+                        <option value="">Select Committee</option>
+                        <option value="United Nations Human Rights Council (UNHRC)
+">United Nations Human Rights Council (UNHRC)
+</option>
+                        <option value="United Nations Economic and Social Council (ECOSOC)">United Nations Economic and Social Council (ECOSOC)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">Preferred Country Matrix (Top 3)</label>
+                    <input type="text" name="preferred_country_matrix" placeholder="e.g. USA, France, Japan" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm">
+                </div>
+
+                <div class="pt-3">
+                    <button type="submit" class="btn-shimmer w-full bg-navy-800 hover:bg-navy-700 text-white font-black py-3.5 px-5 rounded-2xl shadow-lg font-heading text-base">
+                        Submit Delegate Registration
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ASK DOUBT / GOOGLE FORM MODAL -->
+    <div id="doubtModal" class="fixed inset-0 bg-navy-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl border border-slate-100 animate-modal-pop">
+            <button onclick="closeModal('doubtModal')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="flex items-center gap-3.5 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-amber-50 text-gold-600 border border-amber-200 flex items-center justify-center font-bold text-xl">
+                    <i class="fa-solid fa-circle-question"></i>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-black font-heading text-navy-950">Ask a Doubt</h3>
+                    <p class="text-xs font-bold text-slate-500">Contact SMUN Organizers or Open Google Form</p>
+                </div>
+            </div>
+
+            <!-- Direct Google Form Button Option -->
+            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 mb-5 text-center">
+                <span class="text-xs text-slate-600 font-bold block mb-2">Have a detailed query or preference?</span>
+                <a id="googleFormBtn" href="https://forms.gle/nMizspLsQVVYxZHs8" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition-all">
+                    <i class="fa-brands fa-google"></i>
+                    <span>Open Official Google Form</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                </a>
+            </div>
+
+            <div class="text-center my-3 text-xs font-bold text-slate-400 uppercase tracking-widest relative">
+                <span class="bg-white px-2 relative z-10">Or Send Direct Message</span>
+                <div class="absolute inset-x-0 top-1/2 border-t border-slate-200"></div>
+            </div>
+
+            <form id="doubtForm" action="https://formspree.io/f/mzepedzl" method="POST" onsubmit="handleDoubtSubmit(event)" class="space-y-4">
+                <input type="hidden" name="_subject" value="New SMUN 2026 Inquiry / Doubt">
+                <input type="hidden" name="form_type" value="Doubt / Question">
+
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">Your Name *</label>
+                    <input type="text" name="name" required placeholder="Your Name" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">Email Address *</label>
+                    <input type="email" name="email" required placeholder="alex@example.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-black text-slate-700 uppercase tracking-wider mb-1">Your Question / Doubt *</label>
+                    <textarea name="message" required rows="3" placeholder="Type your query regarding matrix, preparation, or schedule..." class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-navy-600 outline-none text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-navy-800 hover:bg-navy-700 text-white font-black py-3 px-5 rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 font-heading text-sm">
+                    <i class="fa-solid fa-paper-plane text-xs"></i> Send Doubt
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION SYSTEM -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-28 opacity-0 transition-all duration-300 bg-navy-950 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4 border border-slate-700">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-lg font-bold shadow-md">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+            <h5 id="toastTitle" class="font-extrabold font-heading text-sm text-white">Success!</h5>
+            <p id="toastMsg" class="text-xs text-slate-300">Your form has been submitted successfully.</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-navy-950 text-slate-400 py-12 border-t border-navy-800">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
+            <div class="flex items-center justify-center space-x-2 text-white font-black font-heading text-2xl">
+                <i class="fa-solid fa-earth-americas text-gold-400"></i>
+                <span>SpreTech MUN <span class="text-gold-400">2026</span></span>
+            </div>
+            
+            <p class="text-sm font-serif italic text-slate-300 max-w-md mx-auto">
+                "Debate. Diplomacy. Leadership. One Conference, Endless Opportunities."
+            </p>
+
+            <div class="pt-4 text-xs text-slate-500 border-t border-navy-900">
+                &copy; 2026 SpreTech Model United Nations. All rights reserved. 100% Free Virtual Conference.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT INTERACTIVE LOGIC -->
+    <script>
+        // Modal Control Functions
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Custom Toast Notification System
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMsg').textContent = message;
+            
+            toast.classList.remove('translate-y-28', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-28', 'opacity-0');
+            }, 4500);
+        }
+
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xjybykda';
+        const FORMSPREE_DOUBT_ENDPOINT = 'https://formspree.io/f/mzepedzl';
+
+        // Registration Submission via Formspree
+        async function handleRegister(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+
+            // UI Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Submitting...';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    closeModal('registerModal');
+                    showToast('Registration Received! 🎉', 'Thank you for registering for SMUN 2026. Conference details will be emailed to you shortly.');
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    showToast('Submission Error ⚠️', data.errors ? data.errors.map(err => err.message).join(', ') : 'There was a problem submitting your form. Please try again.');
+                }
+            } catch (error) {
+                showToast('Network Error ⚠️', 'Could not reach server. Please check your internet connection.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        }
+
+        // Ask Doubt Submission via Formspree
+        async function handleDoubtSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.innerHTML;
+
+            // UI Loading State
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Sending...';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(FORMSPREE_DOUBT_ENDPOINT, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    closeModal('doubtModal');
+                    showToast('Doubt Sent! ✈️', 'Our organizing team will review your question and respond via email.');
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    showToast('Submission Error ⚠️', data.errors ? data.errors.map(err => err.message).join(', ') : 'There was a problem sending your doubt. Please try again.');
+                }
+            } catch (error) {
+                showToast('Network Error ⚠️', 'Could not reach server. Please check your internet connection.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        }
+
+        // FAQs Accordion Toggle
+        function toggleFaq(element) {
+            const p = element.querySelector('p');
+            const icon = element.querySelector('i');
+            if (p.classList.contains('hidden')) {
+                p.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                p.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Live Countdown Clock Logic (Target: Aug 23, 2026)
+        function updateCountdown() {
+            const targetDate = new Date('August 20, 2026 12:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Close Modal when clicking backdrop
+        window.onclick = function(event) {
+            if (event.target.classList.contains('backdrop-blur-md')) {
+                event.target.classList.add('hidden');
+            }
+        };
+    </script>
+</body>
+</html>
